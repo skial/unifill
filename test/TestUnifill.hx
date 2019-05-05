@@ -1,5 +1,6 @@
 package test;
 
+import unifill.UtfX;
 using unifill.Unifill;
 
 class TestUnifill extends haxe.unit.TestCase {
@@ -16,10 +17,10 @@ class TestUnifill extends haxe.unit.TestCase {
 	}
 
 	public function test_uCodePointAt() {
-		assertEquals(cast 0x29E3D, "𩸽あëa".uCodePointAt(0));
-		assertEquals(cast 0x03042, "𩸽あëa".uCodePointAt(1));
-		assertEquals(cast 0x000EB, "𩸽あëa".uCodePointAt(2));
-		assertEquals(cast 0x00061, "𩸽あëa".uCodePointAt(3));
+		assertEquals(0x29E3D, "𩸽あëa".uCodePointAt(0));
+		assertEquals(0x03042, "𩸽あëa".uCodePointAt(1));
+		assertEquals(0x000EB, "𩸽あëa".uCodePointAt(2));
+		assertEquals(0x00061, "𩸽あëa".uCodePointAt(3));
 	}
 
 	public function test_uIndexOf() {
@@ -71,13 +72,13 @@ class TestUnifill extends haxe.unit.TestCase {
 	public function test_uIterator() {
 		var itr = "𩸽あëa".uIterator();
 		assertEquals(true, itr.hasNext());
-		assertEquals(cast 0x29E3D, itr.next());
+		assertEquals(0x29E3D, itr.next());
 		assertEquals(true, itr.hasNext());
-		assertEquals(cast 0x03042, itr.next());
+		assertEquals(0x03042, itr.next());
 		assertEquals(true, itr.hasNext());
-		assertEquals(cast 0x000EB, itr.next());
+		assertEquals(0x000EB, itr.next());
 		assertEquals(true, itr.hasNext());
-		assertEquals(cast 0x00061, itr.next());
+		assertEquals(0x00061, itr.next());
 		assertEquals(false, itr.hasNext());
 	}
 
@@ -88,10 +89,10 @@ class TestUnifill extends haxe.unit.TestCase {
 
 	public function test_uAddChar() {
 		var sb = new StringBuf();
-		sb.uAddChar(cast 0x29E3D);
-		sb.uAddChar(cast 0x03042);
-		sb.uAddChar(cast 0x000EB);
-		sb.uAddChar(cast 0x00061);
+		sb.uAddChar(0x29E3D);
+		sb.uAddChar(0x03042);
+		sb.uAddChar(0x000EB);
+		sb.uAddChar(0x00061);
 		assertEquals("𩸽あëa", sb.toString());
 	}
 
