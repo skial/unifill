@@ -8,22 +8,8 @@ abstract Utf16 (StringU16) {
 	   Converts the code point `code` to a character as a Utf16 string.
 	**/
 	public static inline function fromCodePoint(codePoint : Int) : Utf16 {
-		/*if (codePoint <= 0xFFFF) {
-			return new Utf16(StringU16.fromCodeUnit(codePoint));
-		} else {
-			return new Utf16(StringU16.fromTwoCodeUnits(
-				Unicode.encodeHighSurrogate(codePoint),
-				Unicode.encodeLowSurrogate(codePoint)));
-		}*/
-		/*var s = '';
-		Utf16Impl.encode_code_point(
-			i -> s += (String.fromCharCode(i) + String.fromCharCode(i >> 8)), 
-			codePoint);
-		return new Utf16(StringU16.fromString(s));*/
 		var b = new StringU16Buffer();
-		Utf16Impl.encode_code_point(
-			b.addUnit, 
-			codePoint);
+		Utf16Impl.encode_code_point(b.addUnit, codePoint);
 		return new Utf16(b.getStringU16());
 	}
 
@@ -33,8 +19,6 @@ abstract Utf16 (StringU16) {
 	public static inline function fromCodePoints(codePoints : Iterable<Int>) : Utf16 {
 		var buf = new StringU16Buffer();
 		for (c in codePoints) {
-			//trace( c );
-			//trace( 'hex: ' + StringTools.hex(c, 4) );
 			Utf16Impl.encode_code_point(buf.addUnit, c);
 		}
 		return new Utf16(buf.getStringU16());
@@ -224,39 +208,17 @@ private class Utf16Impl {
 }
 
 #if !(neko || python || php || cpp || lua || eval || macro)
-
-/*private abstract StringU16Buffer(StringBuf) {
-
-	public inline function new() {
-		this = new StringBuf();
-	}
-
-	public inline function addUnit(unit : Int) : Void {
-		this.addChar(unit);
-	}
-
-	public inline function getStringU16() : StringU16 {
-		return StringU16.fromString(this.toString());
-	}
-
-}*/
 @:forward private abstract StringU16Buffer(BytesBuffer) {
 	public inline function new() this = new BytesBuffer();
 
 	public inline function addUnit(unit:Int):Void {
-		//trace( '=> $unit' );
 		this.addByte(unit);
 		this.addByte(unit >> 8);
 	}
 
 	public inline function getStringU16():StringU16 {
 		var b = this.getBytes();
-		/*trace( b.length );
-		trace( b.toHex() );*/
-		var r = StringU16.fromString(b.getString(0, b.length, haxe.io.Encoding.RawNative));
-		/*trace( r.toString() );
-		trace( r.length );*/
-		return r;
+		return StringU16.fromString(b.getString(0, b.length, haxe.io.Encoding.RawNative));
 	}
 }
 
@@ -279,11 +241,6 @@ private abstract StringU16(String) {
 	}
 
 	public static inline function fromArray(a : Array<Int>) : StringU16 {
-		/*var buf = new StringBuf();
-		for (x in a) {
-			buf.addChar( x );
-		}
-		return new StringU16(buf.toString());*/
 		var buf = new StringU16Buffer();
 		for (x in a) {
 			Utf16Impl.encode_code_point( buf.addUnit, x );

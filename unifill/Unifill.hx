@@ -60,20 +60,14 @@ class Unifill {
 	   `startIndex` is counted by code points.
 	 **/
 	public static inline function uLastIndexOf(s : String, value : String, ?startIndex) : Int {
-		/*trace( s.length );
-		trace( value.length );*/
 		if (startIndex == null)
 			startIndex = s.length - 1;
-		//trace( startIndex );
 		var offset = InternalEncoding.offsetByCodePoints(s, 0, startIndex);
-		//trace( offset );
 		#if (eval || macro)
 		// Eval needs to clamp like the majority of targets.
 		if (offset >= s.length) offset = s.length - 1;
 		#end
 		var index = s.lastIndexOf(value, offset);
-		/*trace( index );
-		trace( s.lastIndexOf(value, startIndex));*/
 		return if (index >= 0) InternalEncoding.codePointCount(s, 0, index) else -1;
 	}
 
@@ -159,7 +153,7 @@ class Unifill {
 			Utf8.encodeWith(function(c) sb.addChar(c), c.toInt());
 		#elseif (php || cpp || lua || eval || macro)
 			sb.addChar(c);
-		#elseif (utf32 || python)
+		#elseif (python || hl || js)
 			// Utf32.encodeWith(function(c) sb.addChar(c), c.toInt());
 			sb.addChar(c);
 		#else

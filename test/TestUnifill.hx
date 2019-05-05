@@ -1,6 +1,5 @@
 package test;
 
-import unifill.UtfX;
 using unifill.Unifill;
 
 class TestUnifill extends haxe.unit.TestCase {

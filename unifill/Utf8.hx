@@ -1,7 +1,6 @@
 package unifill;
 
 import haxe.io.Bytes;
-import haxe.io.Encoding;
 import haxe.io.BytesBuffer;
 
 abstract Utf8(StringU8) {
@@ -359,7 +358,6 @@ private abstract StringU8(Bytes) {
 		var cua = function (i) return this.get(i);
 		while (i < len) {
 			var u = Utf8Impl.decode_code_point(len, cua, i);
-			//buf.add(InternalEncoding.fromCodePoint(u));
 			buf.addChar(u);
 			i += Utf8Impl.code_point_width(codeUnitAt(i));
 		}

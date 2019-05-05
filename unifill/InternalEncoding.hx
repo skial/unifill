@@ -16,6 +16,8 @@ class InternalEncoding {
 		return "UTF-8";
 	#elseif (utf32 || python)
 		return "UTF-32";
+	#elseif (utf16 || hl || js)
+		return 'UTF-16';
 	#else
 		return "UTF-16";
 	#end

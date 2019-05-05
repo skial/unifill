@@ -1,8 +1,7 @@
 package test;
 
-import unifill.UtfX;
-import unifill.InternalEncoding;
 import unifill.Unicode;
+import unifill.InternalEncoding;
 
 class TestInternalEncoding extends haxe.unit.TestCase {
 
