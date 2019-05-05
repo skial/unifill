@@ -246,7 +246,7 @@ private class Utf16Impl {
 	public inline function addUnit(unit:Int):Void {
 		//trace( '=> $unit' );
 		this.addByte(unit);
-		#if (hl || js) this.addByte(unit >> 8); #end
+		this.addByte(unit >> 8);
 	}
 
 	public inline function getStringU16():StringU16 {
