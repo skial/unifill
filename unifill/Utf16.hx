@@ -207,7 +207,7 @@ private class Utf16Impl {
 
 }
 
-#if !(neko || python || php || cpp || lua || eval || macro)
+#if (js || hl)
 @:forward private abstract StringU16Buffer(BytesBuffer) {
 	public inline function new() this = new BytesBuffer();
 
