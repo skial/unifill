@@ -17,7 +17,7 @@ class Unifill {
 	   Returns the character at position `index` by code points of String `s`.
 	 **/
 	public static inline function uCharAt(s : String, index : Int) : String {
-	#if (neko || php || cpp || lua || eval || macro)
+	#if (php || cpp || lua || eval || macro)
 		return InternalEncoding.fromCodePoint(s.charCodeAt(index));
 	#else
 		var i = InternalEncoding.offsetByCodePoints(s, 0, index);
@@ -29,7 +29,7 @@ class Unifill {
 	   Returns the code point as Int at position `index` by code points of String `s`.
 	 **/
 	public static inline function uCharCodeAt(s : String, index : Int) : Int {
-	#if (neko || php || cpp || lua || eval || macro)
+	#if (php || cpp || lua || eval || macro)
 		return s.charCodeAt(index);
 	#else
 		var i = InternalEncoding.offsetByCodePoints(s, 0, index);
