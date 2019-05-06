@@ -61,7 +61,7 @@ treating variable-length encoding without considering which encoding form
 is practically used.
 
 These methods index by code units. That is, the value of
-`InternalEncoding.charAt("эюя", 2)` varies depending the tar
+`InternalEncoding.charAt("эюя", 2)` varies depending the target
 environment: the UTF-8 environments (Haxe macro, C++, Neko, PHP and
 Lua) give `"ю"`, while the UTF-16 environments (Flash, C#, Java and
 JavaScript) and the UTF-32 environment (Python) give `"я"`.

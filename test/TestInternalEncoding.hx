@@ -5,6 +5,18 @@ import unifill.InternalEncoding;
 
 class TestInternalEncoding extends haxe.unit.TestCase {
 
+	public function test_codePointWidthAt() {
+		assertEquals(1, InternalEncoding.codePointWidthAt("эюя", 0));
+	}
+
+	public function test_charAt() {
+		assertEquals("я", InternalEncoding.charAt("эюя", 2));
+	}
+
+	public  function test_charAtCodePoint() {
+		assertEquals("ю", InternalEncoding.charAt("эюя", InternalEncoding.codePointWidthAt("эюя", 0)));
+	}
+
 	public function test_fromCodePoint() {
 		assertEquals("𩸽", InternalEncoding.fromCodePoint(0x29E3D));
 		assertEquals("あ", InternalEncoding.fromCodePoint(0x03042));
@@ -18,7 +30,7 @@ class TestInternalEncoding extends haxe.unit.TestCase {
 
 	public function test_isValidString() {
 		assertTrue(InternalEncoding.isValidString("𩸽あëa"));
-	#if (neko || php || cpp || lua || eval || macro)
+		#if (neko || php || cpp || lua || eval || macro)
 		/**
 			The original test, below, originally passed.
 			`assertFalse(InternalEncoding.isValidString("𩸽\xe3\x81ëa"));`
@@ -52,7 +64,7 @@ class TestInternalEncoding extends haxe.unit.TestCase {
 		
 		//assertFalse(InternalEncoding.isValidString("\u00f4\u0090\u0080\u0080"));
 		assertTrue(InternalEncoding.isValidString("\u00f4\u0090\u0080\u0080"));	//	ô
-	#else
+		#else
 		assertFalse(
 			try 
 				InternalEncoding.isValidString(String.fromCharCode(Unicode.minHighSurrogate)) 
@@ -65,7 +77,7 @@ class TestInternalEncoding extends haxe.unit.TestCase {
 			catch (e:Any) 
 				false
 		);
-	#end
+		#end
 	}
 
 }

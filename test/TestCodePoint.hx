@@ -6,6 +6,10 @@ import unifill.Unicode;
 
 class TestCodePoint extends haxe.unit.TestCase {
 
+	public function test_CodePoint_fromInt() {
+		assertEquals("🍻", CodePoint.fromInt(0x1F37B));
+	}
+
 	public function test_Unicode_isScalar() {
 		assertTrue(Unicode.isScalar(Unicode.minCodePoint));
 		assertTrue(Unicode.isScalar(Unicode.maxCodePoint));

@@ -5,10 +5,12 @@ using unifill.Unifill;
 class TestUnifill extends haxe.unit.TestCase {
 
 	public function test_uLength() {
+		assertEquals(3, "日本語".uLength());
 		assertEquals(4, "𩸽あëa".uLength());
 	}
 
 	public function test_uCharAt() {
+		assertEquals("и", "русский".uCharAt(5));
 		assertEquals("𩸽", "𩸽あëa".uCharAt(0));
 		assertEquals("あ", "𩸽あëa".uCharAt(1));
 		assertEquals("ë", "𩸽あëa".uCharAt(2));
@@ -16,6 +18,7 @@ class TestUnifill extends haxe.unit.TestCase {
 	}
 
 	public function test_uCodePointAt() {
+		assertEquals(127866, "🍺".uCodePointAt(0).toInt());
 		assertEquals(0x29E3D, "𩸽あëa".uCodePointAt(0));
 		assertEquals(0x03042, "𩸽あëa".uCodePointAt(1));
 		assertEquals(0x000EB, "𩸽あëa".uCodePointAt(2));
